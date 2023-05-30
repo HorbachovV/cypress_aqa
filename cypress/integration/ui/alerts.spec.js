@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('My test suite', () => {
 
     it('Alert, confirm testing', () => {
@@ -19,11 +21,20 @@ describe('My test suite', () => {
             
         })
     })
-    it.only('Tab testing', () => {
+    it('Tab testing', () => {
 
         cy.visit('https://rahulshettyacademy.com/AutomationPractice/')
 
         cy.get('#opentab').invoke('removeAttr', 'target').click()
 
+    })
+
+    it.only('Navigation testing', () => {
+
+        cy.visit('https://rahulshettyacademy.com/AutomationPractice/')
+        cy.get('#opentab').invoke('removeAttr', 'target').click()
+
+        cy.url().should('include', 'qaclickacademy')
+        cy.go('back')
     })
 })
