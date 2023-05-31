@@ -31,11 +31,17 @@ describe('BeforeEach', () => {
         homePage.getRadioButtonsStatus().should('be.disabled')
     })
 
-    it.skip('My third test case', () => {
+    it.only('My third test case', () => {
         cy.visit('https://rahulshettyacademy.com/angularpractice/shop')
         signUpData.productName.forEach((element) => {
             cy.log(element)
             cy.selectProduct(element)
         })
+        cy.get('#navbarResponsive > .navbar-nav > .nav-item > .nav-link').click()
+        cy.contains('Checkout').click()
+        cy.get('#country').type('ukraine')
+        // Cypress.config('defaultCommandTimeout', 8000)
+        cy.wait(8000)
+        cy.get('.suggestions > ul > li > a').contains('Ukraine').click()
     })
 })    
