@@ -1,5 +1,7 @@
 // cy.pause to pause test
 //cy.debug to debuging
+// npx cypress run --record --key dc34a8e2-2691-4160-a3cf-d6d9e65dcf87 --spec cypress/integration/ui/*.js --headed --browser chrome
+// npx cypress run --record --key dc34a8e2-2691-4160-a3cf-d6d9e65dcf87 --spec cypress/integration/ui/beforeafter.cy.js --headed --browser chrome
 
 /// <reference types="cypress" />
 import signUpData from '../../fixtures/example.json'   
@@ -12,6 +14,10 @@ describe('BeforeEach', () => {
     beforeEach(() => {
 
         cy.visit('https://rahulshettyacademy.com/angularpractice')
+    })
+
+    after(() => {
+        cy.visit('https://rahulshettyacademy.com/')
     })
 
     it('My first test case', () => {
@@ -31,7 +37,7 @@ describe('BeforeEach', () => {
         homePage.getRadioButtonsStatus().should('be.disabled')
     })
 
-    it.only('My third test case', () => {
+    it('My third test case', () => {
         cy.visit('https://rahulshettyacademy.com/angularpractice/shop')
         signUpData.productName.forEach((element) => {
             cy.log(element)
@@ -41,7 +47,41 @@ describe('BeforeEach', () => {
         cy.contains('Checkout').click()
         cy.get('#country').type('ukraine')
         // Cypress.config('defaultCommandTimeout', 8000)
-        cy.wait(8000)
+        cy.wait(6000)
         cy.get('.suggestions > ul > li > a').contains('Ukraine').click()
+        cy.get('#checkbox2').click({force: true})
+        cy.get('.ng-untouched > .btn').click()
+
+        //cheking the same string
+        cy.get('.alert').contains('Success! Thank you! Your order will be delivered in next few weeks :-).')
+        // cy.get('.alert').should('have.text', 'Success! Thank you! Your order will be delivered in next few weeks :-).') // failed
+        cy.get('.alert').then((element) => {
+            const success = element.text()
+            expect(success.includes('Succes')).to.be.true
+        })
+    })
+
+    it('Testing sum of products in cart', () => {
+        let sum = 0
+
+        // cy.visit('https://rahulshettyacademy.com/angularpractice/shop')
+        cy.visit(Cypress.env('url') + 'angularpractice/shop')
+        signUpData.productName.forEach((element) => {
+            cy.selectProduct(element)
+        })
+        cy.get('#navbarResponsive > .navbar-nav > .nav-item > .nav-link').click()
+        cy.get('tr td:nth-child(4) strong').each(($el, index, $list) => {
+
+            let price = $el.text().split(' ')
+            price = price[1].trim()
+            sum += Number(price) 
+            
+        })
+        cy.get('h3 strong').then((element) => {
+
+            let price = element.text().split(' ')
+            price = price[1].trim()
+            expect(Number(sum)).to.equal(Number(price))
+        })
     })
 })    
