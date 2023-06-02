@@ -1,8 +1,3 @@
-// cy.pause to pause test
-//cy.debug to debuging
-// npx cypress run --record --key dc34a8e2-2691-4160-a3cf-d6d9e65dcf87 --spec cypress/integration/ui/*.js --headed --browser chrome
-// npx cypress run --record --key dc34a8e2-2691-4160-a3cf-d6d9e65dcf87 --spec cypress/integration/ui/beforeafter.cy.js --headed --browser chrome
-
 /// <reference types="cypress" />
 import signUpData from '../../fixtures/example.json'   
 import HomePage from '../page_objects/home_page'

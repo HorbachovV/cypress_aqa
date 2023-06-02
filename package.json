@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx cypress run --record --key dc34a8e2-2691-4160-a3cf-d6d9e65dcf87 --spec cypress/integration/ui/beforeafter.cy.js --headed --browser chrome"
   },
   "author": "horbachov volodymyr",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^12.13.0"
+  },
+  "dependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^17.2.0",
+    "@cypress/browserify-preprocessor": "latest"
   }
 }

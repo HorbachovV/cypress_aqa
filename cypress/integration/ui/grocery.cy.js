@@ -1,5 +1,3 @@
-//cypress - spec
-//npx cypress open
 /// <reference types="cypress" />
 
 describe('My test suite', () => {
