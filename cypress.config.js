@@ -12,7 +12,7 @@ module.exports = defineConfig({
     userPassword: 'somepassword'
   },
   e2e: {
-    // specPattern: 'cypress/integration/ui/*.js' // шлях до тестів,щоб було видно ранеру
-    specPattern: 'cypress/integration/api/*.js' // шлях до тестів,щоб було видно ранеру
+    specPattern: 'cypress/integration/ui/*.js' // шлях до тестів,щоб було видно ранеру
+    // specPattern: 'cypress/integration/api/*.js' // шлях до тестів,щоб було видно ранеру
   },
 });
